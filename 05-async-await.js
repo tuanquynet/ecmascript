@@ -1,3 +1,4 @@
+// ECMAScript 2017
 const john = {
     firstName: 'John',
     lastName: 'Stone',
