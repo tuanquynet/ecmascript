@@ -25,8 +25,58 @@ async function getUserSummary() {
     }
 }
 
+async function getNameWithException() {
+  throw new Error('there is some problem in getNameWithException function');
+  return 'new name';
+}
+
+async function getNameWithReject() {
+  return Promise.reject(new Error('there is some problem in getNameWithReject function'));
+}
+
+async function exceptionInSyncFunc() {
+  return this.notAFunction();
+}
+
+async function getNameWithAwaitException() {
+  return await getNameWithException();
+}
+
 getUserSummary().then((result) => {
     console.log(result);
 });
+
+getNameWithException()
+  .then((name) => {
+    console.log(name);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  })
+
+getNameWithReject()
+  .then((name) => {
+    console.log(name);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  })
+
+getNameWithAwaitException()
+  .then((name) => {
+    console.log(name);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  })
+
+exceptionInSyncFunc()
+  .then((result) => {
+    console.log('exceptionInSyncFunc ',result );
+  })
+  .catch((err) => {
+    console.log(err.message);
+    throw err;
+  })
 
 setInterval(() => {}, 1000);
